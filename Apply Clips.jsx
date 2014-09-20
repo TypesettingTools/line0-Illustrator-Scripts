@@ -2,6 +2,7 @@
 #targetengine main
 #include "./lib/l0utils.jsxinc"
 
+var doc = app.activeDocument
 l0_applyClips()
 
 function l0_applyClips() {
