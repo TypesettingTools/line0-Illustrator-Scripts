@@ -11,7 +11,7 @@ function l0_applyClips() {
 
     function applyClips_process()
     {
-        var clipGroups = _.where(doc.groupItems, {'clipped' : true})
+        var clipGroups = _.where(doc.groupItems, {'clipped' : true, 'selected': true})
         l0.setCompoundPathClipping(doc)
         _(clipGroups).forEach(function(clipGroup,j)
         {
