@@ -21,14 +21,18 @@ function l0_applyClips() {
             _.chain(paths).reject({'clipping' : true}).forEach(function(pI,i,pIs)
             {
                 prog.setStatus("Group: " + (j+1) + "  Path: " + i)
-                tmpGroup = clipGroup.parent.groupItems.add()
-                tmpClipPath = clipPath.duplicate(tmpGroup, ElementPlacement.PLACEATEND)
+                var tmpGroup = clipGroup.parent.groupItems.add()
+                var tmpClipPath = clipPath.duplicate(tmpGroup, ElementPlacement.PLACEATEND)
                 pI.move(tmpGroup, ElementPlacement.PLACEATEND)
-                doc.selection = [tmpGroup]        
+                l0.genGUIDs(pI)
+                doc.selection = [tmpGroup]
                 app.executeMenuCommand("Live Pathfinder Crop")
                 app.executeMenuCommand("expandStyle")
-                while(doc.selection[0].pageItems.length>0) {
-                    doc.selection[0].pageItems[0].move(doc.selection[0].parent, ElementPlacement.PLACEATEND)
+                var tmpPIs = doc.selection[0].pageItems
+                while(tmpPIs.length>0) {
+                    if (l0.getGUID(pI)!=l0.getGUID(tmpPIs[0])) { 
+                        tmpPIs[0].move(doc.selection[0].parent, ElementPlacement.PLACEATEND) 
+                    } else tmpPIs[0].remove()
                 }
                 prog.setProgress((j+1)*(i+1)/(clipGroups.length*pIs.length))
             })
