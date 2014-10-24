@@ -34,7 +34,7 @@ function l0_applyClips() {
                         tmpPIs[0].move(doc.selection[0].parent, ElementPlacement.PLACEATEND) 
                     } else tmpPIs[0].remove()
                 }
-                prog.setProgress((j+1)*(i+1)/(clipGroups.length*pIs.length))
+                prog.setProgress(j/clipGroups.length+i/(clipGroups.length*pIs.length))
             })
             clipPath.remove()
         })
